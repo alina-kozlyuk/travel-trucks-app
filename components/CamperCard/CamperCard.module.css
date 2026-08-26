@@ -1,0 +1,152 @@
+.card {
+    display: flex;
+    gap: 24px;
+    padding: 24px;
+    background-color: #f7f7f7;
+    border-radius: 20px;
+    width: 100%;
+}
+
+.imageWrapper {
+    position: relative;
+    width: 290px;
+    height: 320px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #101828;
+}
+
+.price {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.2;
+    color: #101828;
+}
+
+.subHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.rating,
+.location {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #101828;
+}
+
+.ratingText {
+    text-decoration: underline;
+}
+
+.starIcon {
+    fill: #ffc531;
+}
+
+.mapIcon {
+    fill: none;
+    stroke: #101828;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #475467;
+    margin-bottom: 24px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 18px;
+    background-color: #e4e7ec;
+    border-radius: 100px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #101828;
+}
+
+.badgeText {
+    text-transform: capitalize;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    padding: 14px 40px;
+    background-color: #7a958b;
+    color: #ffffff;
+    border-radius: 200px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.button:hover,
+.button:focus {
+    background-color: #657e74;
+}
+
+.starIcon {
+    color: #ffc531;
+    /* Жовта зірочка */
+}
+
+.mapIcon {
+    color: #101828;
+    /* Темна мапа */
+}
+
+.badge svg {
+    color: #101828;
+    flex-shrink: 0;
+}

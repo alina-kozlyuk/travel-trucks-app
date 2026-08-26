@@ -1,69 +1,27 @@
-import { cookies } from "next/headers";
-import { api } from "./api";
+// lib/api/serverApi.ts
 
-import type { Note } from "@/types/note";
-import type { User } from "@/types/user";
+import { CamperFilterParams, CampersFetchResponse } from "@/types/types";
 
-interface FetchNotesParams {
-  search?: string;
-  page?: number;
-  perPage?: number;
-  tag?: string;
+const BASE_URL = 'https://campers-api.goit.study/campers';
+
+export async function fetchCampers(
+  params: CamperFilterParams = {}
+): Promise<CampersFetchResponse> {
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== '') {
+      searchParams.append(key, String(value));
+    }
+  });
+
+  const response = await fetch(`${BASE_URL}?${searchParams.toString()}`, {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch campers');
+  }
+
+  return response.json();
 }
-
-interface FetchNotesResponse {
-  notes: Note[];
-  totalPages: number;
-}
-
-
-const getCookieHeader = async () => {
-  const cookieStore = await cookies();
-
-  return {
-    Cookie: cookieStore.toString(),
-  };
-};
-
-export const fetchNotes = async ({
-  search,
-  page,
-  perPage,
-  tag,
-}: FetchNotesParams): Promise<FetchNotesResponse> => {
-  const response = await api.get<FetchNotesResponse>("/notes", {
-    params: {
-      search,
-      page,
-      perPage,
-      tag,
-    },
-    headers: await getCookieHeader(),
-  });
-
-  return response.data;
-};
-
-export const fetchNoteById = async (id: string): Promise<Note> => {
-  const response = await api.get<Note>(`/notes/${id}`, {
-    headers: await getCookieHeader(),
-  });
-
-  return response.data;
-};
-
-export const checkSession = async () => {
-  const response = await api.get("/auth/session", {
-    headers: await getCookieHeader(),
-  });
-
-  return response;
-};
-
-export const getMe = async (): Promise<User> => {
-  const response = await api.get<User>("/users/me", {
-    headers: await getCookieHeader(),
-  });
-
-  return response.data;
-};

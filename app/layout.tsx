@@ -1,57 +1,58 @@
-import { Metadata } from "next";
-import "./globals.css";
-import { Roboto } from 'next/font/google';
-import { Header } from "@/components/Header/Header";
-import { Footer } from "@/components/Footer/Footer";
-import { TanStackProvider } from "@/components/TanStackProvider/TanStackProvider";
-import AuthProvider from "@/components/AuthProvider/AuthProvider";
+import type { Metadata } from 'next';
+import { Inter, Manrope } from 'next/font/google';
+import Header from '@/components/Header/Header';
+import './globals.css';
+import Providers from "./providers"
 
-
-const roboto = Roboto({
-  subsets: ['latin'], 
-  weight: ['400', '700'],
-  variable: '--font-roboto', 
-  display: 'swap', 
+// Підключаємо основний шрифт Inter (задаємо змінну --font-inter)
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
 });
 
+// Підключаємо додатковий шрифт Manrope (задаємо змінну --font-manrope)
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-manrope',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'NoteHub',
-  description: 'App for your notes',
+  title: 'TravelTrucks',
+  description: 'Camper rental service in Ukraine',
+
   openGraph: {
-    title: 'NoteHub',
-    description: 'App for your notes',
-    url: 'https://08-zustand-zeta-pied.vercel.app',
+    title: 'TravelTrucks',
+    description: 'Find your perfect camper van for rent',
+    url: 'https://traveltrucks.com',
     images: [
       {
         url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
         width: 1200,
         height: 630,
-        alt: 'NoteHub app preview',
+        alt: 'TravelTrucks Preview',
       },
     ],
   },
 };
-
 
 export default function RootLayout({
   children,
   modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal: React.ReactNode;
+  modal?: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={roboto.variable}>
-        <TanStackProvider>
-          <AuthProvider>
-            <Header />
-            {children}
-            <Footer />
-            {modal}
-          </AuthProvider>
-        </TanStackProvider>
+    <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
+      <body>
+        <Header />
+        <Providers>
+          <main>{children}</main>
+        </Providers>
       </body>
     </html>
   );

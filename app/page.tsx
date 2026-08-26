@@ -1,22 +1,31 @@
-import css from './page.module.css'
+// app/page.tsx
+import Image from 'next/image';
+import Link from 'next/link';
+import heroBg from '@/public/hero-bg.jpg';
+import styles from './page.module.css';
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <main>
-  <div className={css.container}>
-    <h1 className={css.title}>Welcome to NoteHub</h1>
-    <p className={css.description}>
-      NoteHub is a simple and efficient application designed for managing
-      personal notes. It helps keep your thoughts organized and accessible
-      in one place, whether you are at home or on the go.
-    </p>
-    <p className={css.description}>
-      The app provides a clean interface for writing, editing, and browsing
-      notes. With support for keyword search and structured organization,
-      NoteHub offers a streamlined experience for anyone who values clarity
-      and productivity.
-    </p>
-  </div>
-</main>
+    <section className={styles.hero}>
+      <Image
+        src={heroBg}
+        alt="Camper vans background"
+        fill
+        priority
+        className={styles.bgImage}
+      />
+
+      <div className="container">
+        <div className={styles.content}>
+          <h1 className={styles.title}>Campers of your dreams</h1>
+          <p className={styles.subtitle}>
+            You can find everything you want in our catalog
+          </p>
+          <Link href="/catalog" className={styles.button}>
+            View Now
+          </Link>
+        </div>
+      </div>
+    </section>
   );
 }

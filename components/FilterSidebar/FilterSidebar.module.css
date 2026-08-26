@@ -1,0 +1,129 @@
+.sidebar {
+    width: 360px;
+    padding: 32px 24px;
+    background-color: #f7f7f7;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.label {
+    display: block;
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 8px;
+}
+
+.inputWrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.inputIcon {
+    position: absolute;
+    left: 16px;
+    color: #101828;
+}
+
+.input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #101828;
+    outline: none;
+}
+
+.filterTitle {
+    font-size: 20px;
+    font-weight: 600;
+    color: #101828;
+    margin: 0;
+}
+
+.subLabel {
+    display: block;
+    font-size: 14px;
+    color: #6c757d;
+    margin-bottom: 12px;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+}
+
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.radioOption {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #101828;
+}
+
+.radioInput {
+    width: 20px;
+    height: 20px;
+    accent-color: #475467;
+    cursor: pointer;
+}
+
+.radioText {
+    user-select: none;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.searchBtn {
+    width: 100%;
+    padding: 16px;
+    background-color: #7a958b;
+    color: #ffffff;
+    border: none;
+    border-radius: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.searchBtn:hover {
+    background-color: #657e74;
+}
+
+.clearBtn {
+    width: 100%;
+    padding: 16px;
+    background-color: #ffffff;
+    color: #101828;
+    border: 1px solid #e4e7ec;
+    border-radius: 200px;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+.clearBtn:hover {
+    border-color: #101828;
+}

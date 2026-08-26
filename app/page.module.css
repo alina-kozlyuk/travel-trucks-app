@@ -1,26 +1,64 @@
-.main {
-    flex: 1;
+.hero {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 72px);
+    min-height: 600px;
+    display: flex;
+    align-items: center;
 }
 
-.container {
-    width: 90%;
-    max-width: 1280px;
-    margin: 0px auto;
-    padding: 0 16px 16px;
+/* Напівпрозоре затемнення фону */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.2);;
+    z-index: -1;
+}
+
+.bgImage {
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+}
+
+.content {
+    max-width: 596px;
 }
 
 .title {
-    font-size: 36px;
-    font-weight: 700;
-    color: #1a1a1a;
-    margin-bottom: 60px;
-    text-align: center;
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 0.67;
+    color: var(--inputs);
+    margin-bottom: 16px;
 }
 
-.description {
-    font-size: 18px;
-    color: #444444;
-    line-height: 28px;
-    margin-bottom: 16px;
-    text-align: center;
+.subtitle {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 1.33;
+    color: var(--inputs);
+    margin-bottom: 40px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 200px;
+    width: 173px;
+    height: 56px;
+    background: var(--grey-green);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    transition: background-color 0.2s ease;
+}
+
+.button:hover,
+.button:focus {
+    background-color: var(--green-hover);;
 }
