@@ -1,31 +1,33 @@
+//app/catalog/page.tsx 
+
+import { Suspense } from 'react';
 import {
   HydrationBoundary,
   QueryClient,
   dehydrate,
 } from '@tanstack/react-query';
-import { Metadata } from 'next';
 import CatalogClient from './CatalogClient';
 import { fetchCampers } from '@/lib/api/serverApi';
-
-export const metadata: Metadata = {
-  title: 'Camper Catalog | TravelTrucks',
-  description: 'Explore our wide range of camper vans available for rent in Ukraine.',
-};
+import Loading from '../loading';
 
 export default async function CatalogPage() {
   const queryClient = new QueryClient();
 
-  // Префетчимо першу сторінку каталогу
+  // Використовуємо порожній об'єкт як дефолтний параметр
+  const initialFilters = {};
+
   await queryClient.prefetchInfiniteQuery({
-    queryKey: ['campers', {}],
+    queryKey: ['campers', initialFilters],
     queryFn: ({ pageParam = 1 }) =>
-      fetchCampers({ page: pageParam, limit: 4 }),
+      fetchCampers({ page: pageParam, perPage: 4 }),
     initialPageParam: 1,
   });
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <CatalogClient />
+      <Suspense fallback={<Loading />}>
+        <CatalogClient />
+      </Suspense>
     </HydrationBoundary>
   );
 }

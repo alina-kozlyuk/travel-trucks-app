@@ -1,8 +1,14 @@
+//FilterSidebar.tsx
 'use client';
 
 import { useState } from 'react';
 import { FiMapPin, FiX } from 'react-icons/fi';
-import { CamperFilterParams, CamperForm, CamperEngine, CamperTransmission } from '@/types/types';
+import {
+  CamperFilterParams,
+  CamperForm,
+  CamperEngine,
+  CamperTransmission,
+} from '@/types/types';
 import styles from './FilterSidebar.module.css';
 
 interface FilterSidebarProps {
@@ -17,11 +23,15 @@ export default function FilterSidebar({
   onClear,
 }: FilterSidebarProps) {
   const [location, setLocation] = useState(initialFilters.location || '');
-  const [form, setForm] = useState<CamperForm | undefined>(initialFilters.form);
-  const [engine, setEngine] = useState<CamperEngine | undefined>(initialFilters.engine);
-  const [transmission, setTransmission] = useState<CamperTransmission | undefined>(
-    initialFilters.transmission
+  const [form, setForm] = useState<CamperForm | undefined>(
+    initialFilters.form as CamperForm | undefined
   );
+  const [engine, setEngine] = useState<CamperEngine | undefined>(
+    initialFilters.engine as CamperEngine | undefined
+  );
+  const [transmission, setTransmission] = useState<
+    CamperTransmission | undefined
+  >(initialFilters.transmission as CamperTransmission | undefined);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

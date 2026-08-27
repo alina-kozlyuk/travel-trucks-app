@@ -1,12 +1,12 @@
+//app/catalog/CatalogClient.tsx 
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { fetchCampers } from '@/lib/api/clientApi';
 import { CamperFilterParams } from '@/types/types';
 import CamperCard from '@/components/CamperCard/CamperCard';
 import FilterSidebar from '@/components/FilterSidebar/FilterSidebar';
-import LoaderModal from '@/components/LoaderModal/LoaderModal';
 import EmptyState from '@/components/EmptyState/EmptyState';
 import css from './Catalog.module.css';
 
@@ -22,7 +22,7 @@ export default function CatalogClient() {
   } = useInfiniteQuery({
     queryKey: ['campers', filterParams],
     queryFn: ({ pageParam = 1 }) =>
-      fetchCampers({ ...filterParams, page: pageParam, limit: 4 }),
+      fetchCampers({ ...filterParams, page: pageParam, perPage: 4 }),
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       if (lastPage.page < lastPage.totalPages) {
@@ -46,17 +46,17 @@ export default function CatalogClient() {
   return (
     <div className="container">
       <div className={css.layout}>
-        {/* Сайдбар із фільтрами */}
-        <FilterSidebar
-          initialFilters={filterParams}
-          onSearch={handleSearch}
-          onClear={handleClear}
-        />
+        {/* Обгортаємо FilterSidebar у Suspense на випадок використання useSearchParams */}
+        <Suspense fallback={null}>
+          <FilterSidebar
+            initialFilters={filterParams}
+            onSearch={handleSearch}
+            onClear={handleClear}
+          />
+        </Suspense>
 
         {/* Список або Порожній стан */}
         <main className={css.content}>
-          {(isLoading || isFetchingNextPage) && <LoaderModal />}
-
           {!isLoading && campers.length === 0 && (
             <EmptyState onResetFilters={handleClear} />
           )}
@@ -71,14 +71,15 @@ export default function CatalogClient() {
             </ul>
           )}
 
-          {hasNextPage && !isLoading && (
+          {hasNextPage && (
             <div className={css.loadMoreWrapper}>
               <button
                 type="button"
                 onClick={() => fetchNextPage()}
+                disabled={isFetchingNextPage}
                 className={css.loadMoreBtn}
               >
-                Load more
+                {isFetchingNextPage ? 'Loading...' : 'Load more'}
               </button>
             </div>
           )}

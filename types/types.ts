@@ -1,5 +1,15 @@
-export type CamperForm = 'alcove' | 'panel_van' | 'integrated' | 'semi_integrated';
+// ==========================================
+// 1. ENUMS & CONST TYPES (значення з Swagger)
+// ==========================================
+
+export type CamperForm =
+  | 'alcove'
+  | 'panel_van'
+  | 'integrated'
+  | 'semi_integrated';
+
 export type CamperTransmission = 'automatic' | 'manual';
+
 export type CamperEngine = 'diesel' | 'petrol' | 'hybrid' | 'electric';
 
 export type CamperAmenity =
@@ -13,26 +23,25 @@ export type CamperAmenity =
   | 'gas'
   | 'water';
 
-// --- GALLERY & REVIEWS ---
-export interface CamperImage {
+// ==========================================
+// 2. CAMPER MODELS (моделі даних)
+// ==========================================
+
+/**
+ * Елемент галереї детальної сторінки
+ */
+export interface CamperGalleryItem {
   id: string;
   camperId: string;
-  thumb: string;
-  original: string;
+  thumb?: string;
+  original?: string;
   order: number;
 }
 
-export interface Review {
-  id: string;
-  camperId: string;
-  reviewer_name: string;
-  reviewer_rating: number;
-  comment: string;
-  createdAt: string;
-}
-
-// --- CAMPER ENTITIES ---
-// Базовий елемент у списку (GET /campers)
+export type GalleryImage = string | CamperGalleryItem;
+/**
+ * Картка кемпера у списку (GET /campers)
+ */
 export interface CamperListItem {
   id: string;
   name: string;
@@ -47,20 +56,67 @@ export interface CamperListItem {
   consumption: string;
   transmission: CamperTransmission;
   engine: CamperEngine;
-  amenities: CamperAmenity[]; // Залишаємо строго масив під наш JSON
+  amenities: CamperAmenity[];
   coverImage: string;
   totalReviews: number;
 }
 
-// Повна інформація про кемпер (GET /campers/{camperId})
-export interface CamperDetail extends CamperListItem {
+/**
+ * Детальна інформація про кемпер (GET /campers/{camperId})
+ */
+export interface CamperDetail {
+  id: string;
+  name: string;
+  price: number;
+  rating: number;
+  totalReviews: number;
+  location: string;
   description: string;
-  gallery: CamperImage[];
+  form: CamperForm;
+  length: string;
+  width: string;
+  height: string;
+  tank: string;
+  consumption: string;
+  transmission: CamperTransmission;
+  engine: CamperEngine;
+  amenities: CamperAmenity[] | string;
+  gallery: CamperGalleryItem[];
   createdAt: string;
   updatedAt: string;
 }
 
-// --- API RESPONSES ---
+/**
+ * Відгук про кемпер (GET /campers/{camperId}/reviews)
+ */
+export interface CamperReview {
+  id: string;
+  camperId: string;
+  reviewer_name: string;
+  reviewer_rating: number; // 1-5
+  comment: string;
+  createdAt: string;
+}
+
+// ==========================================
+// 3. API REQUESTS & RESPONSES (запити та відповіді)
+// ==========================================
+
+/**
+ * Параметри фільтрації та пагінації для GET /campers
+ */
+export interface CamperFilterParams {
+  page?: number;
+  perPage?: number;
+  location?: string;
+  form?: CamperForm | string;
+  transmission?: CamperTransmission | string;
+  engine?: CamperEngine | string;
+}
+
+/**
+ * Відповідь від GET /campers
+ */
 export interface CampersFetchResponse {
   page: number;
   perPage: number;
@@ -69,45 +125,28 @@ export interface CampersFetchResponse {
   campers: CamperListItem[];
 }
 
-export interface CamperFiltersResponse {
+/**
+ * Відповідь від GET /campers/filters
+ */
+export interface CamperFiltersConfigResponse {
   forms: CamperForm[];
   transmissions: CamperTransmission[];
   engines: CamperEngine[];
 }
 
-// --- REQUEST PARAMS & FORMS ---
-export interface CamperFilterParams {
-  location?: string;
-  form?: CamperForm;
-  engine?: CamperEngine;
-  transmission?: CamperTransmission;
-  AC?: boolean;
-  bathroom?: boolean;
-  kitchen?: boolean;
-  TV?: boolean;
-  radio?: boolean;
-  refrigerator?: boolean;
-  microwave?: boolean;
-  gas?: boolean;
-  water?: boolean;
-  page?: number;
-  limit?: number;
-}
-
-export interface BookingData {
+/**
+ * Тіло запиту на бронювання (POST /campers/{camperId}/booking-requests)
+ */
+export interface BookingRequestBody {
   name: string;
   email: string;
-  bookingDate?: string;
+  bookingDate?: string; // Додатково для календаря згідно з Figma
   comment?: string;
 }
 
+/**
+ * Відповідь бекенду після відправки бронювання
+ */
 export interface BookingResponse {
-  id: string;
-  camperId: string;
-  name: string;
-  email: string;
-  bookingDate?: string;
-  comment?: string;
-  createdAt: string;
-  updatedAt: string;
+  message: string;
 }

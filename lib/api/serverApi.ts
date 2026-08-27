@@ -25,3 +25,15 @@ export async function fetchCampers(
 
   return response.json();
 }
+
+export async function fetchCamperById(id: string) {
+  const response = await fetch(`https://campers-api.goit.study/campers/${id}`, {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error('Failed to fetch camper details');
+  }
+
+  return response.json();
+}

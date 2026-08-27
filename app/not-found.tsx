@@ -1,3 +1,4 @@
+//app/not-found.tsx
 import { Metadata } from 'next';
 import css from './page.module.css'
 
