@@ -73,6 +73,7 @@ export default function BookingForm({ camperId }: BookingFormProps) {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Name*"
+              aria-label="Name"
               className={styles.input}
             />
             {errors.name && <span className={styles.errorIcon}>!</span>}
@@ -89,6 +90,7 @@ export default function BookingForm({ camperId }: BookingFormProps) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email*"
+              aria-label="Email"
               className={styles.input}
             />
             {errors.email && <span className={styles.errorIcon}>!</span>}

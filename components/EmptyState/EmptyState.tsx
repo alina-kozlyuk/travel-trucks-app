@@ -26,7 +26,7 @@ export default function EmptyState({ onResetFilters }: EmptyStateProps) {
       <h3 className={styles.title}>No campers found</h3>
       
       <p className={styles.message}>
-        We couldn`t find any campers that match your filters. Try adjusting your search or clearing some filters.
+        We couldnʼt find any campers that match your filters. Try adjusting your search or clearing some filters.
       </p>
 
       <div className={styles.actions}>

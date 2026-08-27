@@ -1,5 +1,6 @@
+//types/types.ts
 // ==========================================
-// 1. ENUMS & CONST TYPES (значення з Swagger)
+// 1. ENUMS & CONST TYPES
 // ==========================================
 
 export type CamperForm =
@@ -24,7 +25,7 @@ export type CamperAmenity =
   | 'water';
 
 // ==========================================
-// 2. CAMPER MODELS (моделі даних)
+// 2. CAMPER MODELS
 // ==========================================
 
 /**
@@ -33,12 +34,13 @@ export type CamperAmenity =
 export interface CamperGalleryItem {
   id: string;
   camperId: string;
-  thumb?: string;
-  original?: string;
+  thumb: string;
+  original: string;
   order: number;
 }
 
 export type GalleryImage = string | CamperGalleryItem;
+
 /**
  * Картка кемпера у списку (GET /campers)
  */
@@ -99,7 +101,7 @@ export interface CamperReview {
 }
 
 // ==========================================
-// 3. API REQUESTS & RESPONSES (запити та відповіді)
+// 3. API REQUESTS & RESPONSES
 // ==========================================
 
 /**
@@ -136,12 +138,13 @@ export interface CamperFiltersConfigResponse {
 
 /**
  * Тіло запиту на бронювання (POST /campers/{camperId}/booking-requests)
+ * Бекенд строго вимагає name та email
  */
 export interface BookingRequestBody {
   name: string;
   email: string;
-  bookingDate?: string; // Додатково для календаря згідно з Figma
-  comment?: string;
+  bookingDate?: string; // Для збереження стану форми календаря в UI
+  comment?: string;     // Для збереження стану тексту коментаря в UI
 }
 
 /**

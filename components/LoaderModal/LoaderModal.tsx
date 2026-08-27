@@ -8,7 +8,7 @@ interface LoaderModalProps {
 }
 
 export default function LoaderModal({
-  title = 'Loading tracks...',
+  title = 'Loading trucks...',
   message = 'Please wait while we fetch the best travel trucks for you',
 }: LoaderModalProps) {
   return (

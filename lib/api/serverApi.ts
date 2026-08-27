@@ -1,8 +1,7 @@
 // lib/api/serverApi.ts
+import { CamperDetail, CamperFilterParams, CampersFetchResponse } from "@/types/types";
 
-import { CamperFilterParams, CampersFetchResponse } from "@/types/types";
-
-const BASE_URL = 'https://campers-api.goit.study/campers';
+const BASE_URL = 'https://campers-api.goit.study';
 
 export async function fetchCampers(
   params: CamperFilterParams = {}
@@ -15,7 +14,7 @@ export async function fetchCampers(
     }
   });
 
-  const response = await fetch(`${BASE_URL}?${searchParams.toString()}`, {
+  const response = await fetch(`${BASE_URL}/campers?${searchParams.toString()}`, {
     cache: 'no-store',
   });
 
@@ -26,8 +25,8 @@ export async function fetchCampers(
   return response.json();
 }
 
-export async function fetchCamperById(id: string) {
-  const response = await fetch(`https://campers-api.goit.study/campers/${id}`, {
+export async function fetchCamperById(id: string): Promise<CamperDetail> {
+  const response = await fetch(`${BASE_URL}/campers/${id}`, {
     cache: 'no-store',
   });
 

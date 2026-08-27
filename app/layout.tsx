@@ -21,6 +21,8 @@ const manrope = Manrope({
   display: 'swap',
 });
 
+const BASE_URL = 'https://travel-trucks-app-navy.vercel.app';
+
 export const metadata: Metadata = {
   title: 'TravelTrucks',
   description: 'Camper rental service in Ukraine',
@@ -28,10 +30,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'TravelTrucks',
     description: 'Find your perfect camper van for rent',
-    url: 'https://traveltrucks.com',
+    url: 'https://travel-trucks-app-navy.vercel.app/',
     images: [
       {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        url: `${BASE_URL}/hero-bg.jpg`,
         width: 1200,
         height: 630,
         alt: 'TravelTrucks Preview',

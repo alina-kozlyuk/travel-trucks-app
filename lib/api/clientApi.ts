@@ -1,3 +1,4 @@
+//lib/api/clientApi.ts
 import axios from 'axios';
 import {
   CamperDetail,
@@ -50,9 +51,15 @@ export async function sendBookingRequest(
   camperId: string,
   bookingData: BookingRequestBody
 ): Promise<BookingResponse> {
+  // Відправляємо на бекенд тільки name та email згідно зі Swagger
+  const payload = {
+    name: bookingData.name,
+    email: bookingData.email,
+  };
+
   const { data } = await apiClient.post<BookingResponse>(
     `/campers/${camperId}/booking-requests`,
-    bookingData
+    payload
   );
   return data;
 }
