@@ -1,4 +1,3 @@
-//lib/api/clientApi.ts
 import axios from 'axios';
 import {
   CamperDetail,
@@ -15,7 +14,6 @@ export const apiClient = axios.create({
   baseURL: BASE_URL,
 });
 
-// 1. Отримання каталогу кемперів (з фільтрацією та пагінацією)
 export async function fetchCampers(
   params: CamperFilterParams
 ): Promise<CampersFetchResponse> {
@@ -34,24 +32,20 @@ export async function fetchCampers(
   return data;
 }
 
-// 2. Отримання деталей окремого кемпера
 export async function fetchCamperById(id: string): Promise<CamperDetail> {
   const { data } = await apiClient.get<CamperDetail>(`/campers/${id}`);
   return data;
 }
 
-// 3. Отримання відгуків для кемпера
 export async function fetchCamperReviews(id: string): Promise<CamperReview[]> {
   const { data } = await apiClient.get<CamperReview[]>(`/campers/${id}/reviews`);
   return data;
 }
 
-// 4. Відправка бронювання кемпера
 export async function sendBookingRequest(
   camperId: string,
   bookingData: BookingRequestBody
 ): Promise<BookingResponse> {
-  // Відправляємо на бекенд тільки name та email згідно зі Swagger
   const payload = {
     name: bookingData.name,
     email: bookingData.email,

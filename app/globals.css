@@ -1,5 +1,4 @@
 :root {
-  /* Кольорова палітра з Figma */
   --main: #101828;
   --text: #475467;
   --white: #fff;
@@ -14,12 +13,10 @@
   --olive: #f0f1f1;
   --green-hover: #6d7b75;
 
-  /* Шрифти з Figma */
   --font-family: "Inter", sans-serif;
   --second-family: "Manrope", sans-serif;
 }
 
-/* Base CSS Reset */
 *,
 *::before,
 *::after {
@@ -47,14 +44,30 @@ main {
   width: 100%;
 }
 
+
 .container {
   width: 100%;
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 64px;
-  padding-right: 64px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+}
+
 
 a {
   color: inherit;
@@ -75,5 +88,6 @@ ol {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
 }

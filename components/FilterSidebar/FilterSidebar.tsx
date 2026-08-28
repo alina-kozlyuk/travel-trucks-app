@@ -1,4 +1,3 @@
-//FilterSidebar.tsx
 'use client';
 
 import { useState } from 'react';
@@ -53,7 +52,6 @@ export default function FilterSidebar({
 
   return (
     <form onSubmit={handleSubmit} className={styles.sidebar}>
-      {/* Поле локації */}
       <div className={styles.section}>
         <label className={styles.label}>Location</label>
         <div className={styles.inputWrapper}>
@@ -70,7 +68,6 @@ export default function FilterSidebar({
 
       <h3 className={styles.filterTitle}>Filters</h3>
 
-      {/* Фільтр Camper form */}
       <div className={styles.section}>
         <span className={styles.subLabel}>Camper form</span>
         <div className={styles.radioGroup}>
@@ -94,7 +91,6 @@ export default function FilterSidebar({
         </div>
       </div>
 
-      {/* Фільтр Engine */}
       <div className={styles.section}>
         <span className={styles.subLabel}>Engine</span>
         <div className={styles.radioGroup}>
@@ -118,7 +114,6 @@ export default function FilterSidebar({
         </div>
       </div>
 
-      {/* Фільтр Transmission */}
       <div className={styles.section}>
         <span className={styles.subLabel}>Transmission</span>
         <div className={styles.radioGroup}>
@@ -140,7 +135,6 @@ export default function FilterSidebar({
         </div>
       </div>
 
-      {/* Кнопки підтвердження та скидання */}
       <div className={styles.actions}>
         <button type="submit" className={styles.searchBtn}>
           Search

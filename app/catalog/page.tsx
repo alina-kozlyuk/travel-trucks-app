@@ -1,5 +1,3 @@
-//app/catalog/page.tsx 
-
 import { Suspense } from 'react';
 import {
   HydrationBoundary,
@@ -13,7 +11,6 @@ import Loading from '../loading';
 export default async function CatalogPage() {
   const queryClient = new QueryClient();
 
-  // Використовуємо порожній об'єкт як дефолтний параметр
   const initialFilters = {};
 
   await queryClient.prefetchInfiniteQuery({

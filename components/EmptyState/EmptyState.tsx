@@ -11,10 +11,9 @@ interface EmptyStateProps {
 export default function EmptyState({ onResetFilters }: EmptyStateProps) {
   return (
     <div className={styles.container}>
-      {/* Ілюстрація з папки public */}
       <div className={styles.imageWrapper}>
         <Image
-          src="/no-campers-found.svg" // Поклади файл із зображенням у папку public/
+          src="/no-campers-found.svg" 
           alt="No campers found"
           width={360}
           height={200}

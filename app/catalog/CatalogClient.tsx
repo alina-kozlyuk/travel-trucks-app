@@ -1,4 +1,3 @@
-//app/catalog/CatalogClient.tsx 
 'use client';
 
 import { useMemo, Suspense } from 'react';
@@ -17,7 +16,6 @@ function CatalogContent() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // 1. Синхронізуємо об'єкт фільтрів із URL query-параметрами
   const filterParams = useMemo<CamperFilterParams>(() => {
     return {
       location: searchParams.get('location') || undefined,
@@ -27,7 +25,6 @@ function CatalogContent() {
     };
   }, [searchParams]);
 
-  // 2. React Query запит із залежністю від filterParams (чиститься і перезапитується при зміні URL)
   const {
     data,
     fetchNextPage,
@@ -51,7 +48,6 @@ function CatalogContent() {
 
   const campers = data?.pages.flatMap((page) => page.campers) ?? [];
 
-  // 3. Записуємо нові фільтри в URL
   const handleSearch = (newFilters: CamperFilterParams) => {
     const params = new URLSearchParams();
 
@@ -64,7 +60,6 @@ function CatalogContent() {
     router.push(`${pathname}?${params.toString()}`);
   };
 
-  // 4. Очищаємо URL-параметри
   const handleClear = () => {
     router.push(pathname);
   };
@@ -78,15 +73,12 @@ function CatalogContent() {
       />
 
       <main className={css.content}>
-        {/* Показуємо лоадер під час початкового завантаження або перезапиту фільтрів */}
         {isLoading && <Loading />}
 
-        {/* Порожній стан, якщо немає результатів і завантаження завершено */}
         {!isLoading && campers.length === 0 && (
           <EmptyState onResetFilters={handleClear} />
         )}
 
-        {/* Список кемперів */}
         {!isLoading && campers.length > 0 && (
           <ul className={css.list}>
             {campers.map((camper) => (
@@ -97,7 +89,6 @@ function CatalogContent() {
           </ul>
         )}
 
-        {/* Кнопка підвантаження */}
         {!isLoading && hasNextPage && (
           <div className={css.loadMoreWrapper}>
             <button

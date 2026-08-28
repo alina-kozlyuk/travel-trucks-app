@@ -16,7 +16,6 @@
     justify-content: center;
 }
 
-/* Круговий спінер */
 .spinner {
     width: 48px;
     height: 48px;
@@ -27,7 +26,6 @@
     z-index: 2;
 }
 
-/* М'яка хвиля/pulsing на фоні */
 .pulseBg {
     position: absolute;
     width: 60px;
@@ -47,7 +45,6 @@
     animation: fadeInOut 1.5s ease-in-out infinite;
 }
 
-/* Анімації */
 @keyframes spin {
     to {
         transform: rotate(360deg);

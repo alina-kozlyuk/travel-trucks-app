@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚐 TravelTrucks — Frontend
 
-## Getting Started
+Фронтенд для **TravelTrucks** — вебзастосунку для оренди кемперів у Україні. Побудований на
+**Next.js 15 (App Router)**.
 
-First, run the development server:
+## Про проєкт
+
+**TravelTrucks** об'єднує мандрівників навколо ідеї свободи та комфортних подорожей: користувачі
+можуть переглядати каталог доступних автобудинків, детально вивчати їхні технічні характеристики
+(тип двигуна, трансмісію, наявність кондиціонера, кухні тощо), читати відгуки інших мандрівників та
+надсилати заявки на бронювання.
+
+Цей репозиторій — клієнтська частина застосунку: реалізація каталогу з бекенд-фільтрацією та
+нескінченним завантаженням ("Load More"), детальна сторінка кемпера з інтерактивною галереєю
+зображень, форма бронювання з валідацією полів та сповіщеннями про успіх.
+
+Проєкт виконано за технічним завданням та дизайн-макетом Figma: семантична розмітка, динамічна
+генерація метаданих, обробка станів завантаження (Loader) та порожнього результату (Empty State).
+
+## Живий проєкт
+
+| Що                             | Адреса                                       |
+| ------------------------------ | -------------------------------------------- |
+| **Фронтенд**                   | [https://travel-trucks-app-navy.vercel.app/] |
+| **Документація API (Swagger)** | [https://campers-api.goit.study]             |
+
+---
+
+## Функціонал
+
+- **Головна сторінка (`/`):** Продаючий банер із закликом до дії та кнопкою **View Now** для
+  швидкого переходу до каталогу.
+- **Стрічка каталогу (`/catalog`):**
+- Пагінація у форматі **Load More** (підвантаження по 4 нові картки за допомогою
+  `useInfiniteQuery`).
+- Бекенд-фільтрація через query-параметри: локація (текстовий пошук), тип кузова (Alcove, Panel Van,
+  Integrated, Semi-Integrated), тип двигуна та трансмісія.
+- Компонент **Empty State** із можливістю швидкого скидання фільтрів, якщо за запитом нічого не
+  знайдено.
+- Відкриття детальної сторінки кемпера в новій вкладці браузера (`target="_blank"`) за кнопкою
+  **Show more**.
+
+- **Сторінка окремого кемпера (`/catalog/[camperId]`):**
+- Динамічні SSR-метадані (`generateMetadata`).
+- Інтерактивна галерея зображень із слайдером прев'ю на базі **Swiper.js**.
+- Повна специфікація кемпера та перелік доступних зручностей (AC, Kitchen, Bathroom, TV тощо).
+- Список відгуків користувачів із 5-зірковою рейтинговою системою.
+
+- **Форма бронювання:**
+- Валідація введених даних (ім'я, email).
+- Відправка POST-запиту на бекенд та виведення нотифікації про успішне бронювання.
+
+- **Обробка завантаження та помилок:** Кастомний `LoaderModal` під час асинхронних запитів.
+
+---
+
+## Стек
+
+- **Next.js 15 (App Router)**, **TypeScript**
+- **CSS Modules**
+- **TanStack React Query (v5)** — пагінація `useInfiniteQuery` та кешування даних
+- **Axios** & **Native Fetch API** — взаємодія з бекендом
+- **Swiper.js** — слайдер та галерея зображень з thumbs-режимом
+- **React Hot Toast** — вспливаючі нотифікації про бронювання
+- **React Icons** — іконки зручностей та специфікацій
+
+---
+
+## Швидкий старт
+
+1. **Встановити залежності:**
+
+```bash
+npm install
+
+```
+
+2. **Запустити у dev-режимі:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. **Відкрити застосунок:** Перейдіть у браузері за адресою
+   [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Структура проєкту
 
-## Learn More
+```text
+app/
+  catalog/
+    [camperId]/        — сторінка деталей кемпера (Server Component + Client Component)
+      page.tsx
+      CamperDetailsClient.tsx
+    page.tsx           — сторінка каталогу
+    CatalogClient.tsx
+  layout.tsx           — кореневий Layout та провайдери (QueryClientProvider)
+  page.tsx             — головна сторінка (Home)
+components/            — переюзабельні UI-компоненти
+  BookingForm/         — форма бронювання кемпера
+  CamperCard/          — картка кемпера в каталозі
+  EmptyState/          — плашка при відсутності результатів фільтрації
+  FilterSidebar/       — сайдбар з фільтрами
+  Header/              — шапка сайту з навігацією
+  LoaderModal/         — спінер завантаження
+  ReviewsList/         — список відгуків із зірковим рейтингом
+lib/
+  api/
+    clientApi.ts       — Axios-запити для клієнтських компонентів (Query & Mutations)
+    serverApi.ts       — Fetch-запити для SSR та генерації метаданих
+types/
+  types.ts             — доменні типи та TypeScript-інтерфейси (Swagger schema)
+public/                — статичні файли, svg-ілюстрації та іконки
 
-To learn more about Next.js, take a look at the following resources:
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Скрипти
 
-## Deploy on Vercel
+| Команда         | Що робить                                     |
+| --------------- | --------------------------------------------- |
+| `npm run dev`   | Запуск у dev-режимі (`http://localhost:3000`) |
+| `npm run build` | Продакшн-збірка проєкту                       |
+| `npm start`     | Запуск продакшн-збірки                        |
+| `npm run lint`  | Перевірка коду за допомогою ESLint            |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 👩‍💻 Автор
+
+- **Аліна Козлюк** — Fullstack Developer
+- **GitHub:** [@alina-kozlyuk](https://github.com/alina-kozlyuk)

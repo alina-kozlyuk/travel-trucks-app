@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { sendBookingRequest } from '@/lib/api/clientApi';
 import styles from './BookingForm.module.css';
 
@@ -13,12 +14,10 @@ export default function BookingForm({ camperId }: BookingFormProps) {
   const [email, setEmail] = useState('');
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
 
   const validate = () => {
     const newErrors: { name?: string; email?: string } = {};
-    
-    // Проста валідація за аналогією з макетом (не ім'я з цифрами, коректний email)
+
     if (!name.trim()) {
       newErrors.name = 'Please enter your name.';
     } else if (!/^[a-zA-Zа-яА-ЯіІїЇєЄ\s]+$/.test(name)) {
@@ -37,7 +36,6 @@ export default function BookingForm({ camperId }: BookingFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccessMessage('');
 
     if (!validate()) return;
 
@@ -47,12 +45,14 @@ export default function BookingForm({ camperId }: BookingFormProps) {
         name: name.trim(),
         email: email.trim(),
       });
-      setSuccessMessage(response.message || 'Booking request sent successfully!');
+      
+      toast.success(response.message || 'Booking request sent successfully!');
+      
       setName('');
       setEmail('');
       setErrors({});
-    } catch (error) {
-      alert('Failed to send booking request. Please try again.');
+    } catch {
+      toast.error('Failed to send booking request. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -64,10 +64,8 @@ export default function BookingForm({ camperId }: BookingFormProps) {
       <p className={styles.subtitle}>Stay connected! We are always ready to help you.</p>
 
       <form onSubmit={handleSubmit} className={styles.form} noValidate>
-        {/* Поле Name */}
         <div className={styles.fieldGroup}>
           <div className={`${styles.inputWrapper} ${errors.name ? styles.inputError : ''}`}>
-            <label className={styles.label}></label>
             <input
               type="text"
               value={name}
@@ -81,10 +79,8 @@ export default function BookingForm({ camperId }: BookingFormProps) {
           {errors.name && <p className={styles.errorMessage}>{errors.name}</p>}
         </div>
 
-        {/* Поле Email */}
         <div className={styles.fieldGroup}>
           <div className={`${styles.inputWrapper} ${errors.email ? styles.inputError : ''}`}>
-            <label className={styles.label}></label>
             <input
               type="email"
               value={email}
@@ -101,8 +97,6 @@ export default function BookingForm({ camperId }: BookingFormProps) {
         <button type="submit" disabled={isSubmitting} className={styles.submitBtn}>
           {isSubmitting ? 'Sending...' : 'Send'}
         </button>
-
-        {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
       </form>
     </div>
   );

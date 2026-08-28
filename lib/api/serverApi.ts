@@ -1,4 +1,3 @@
-// lib/api/serverApi.ts
 import { CamperDetail, CamperFilterParams, CampersFetchResponse } from "@/types/types";
 
 const BASE_URL = 'https://campers-api.goit.study';

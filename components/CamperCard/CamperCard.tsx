@@ -25,7 +25,6 @@ interface CamperCardProps {
 export default function CamperCard({ camper }: CamperCardProps) {
   const formattedLocation = camper.location.split(', ').reverse().join(', ');
 
-  // Мапінг зручностей до іконок
   const renderAmenityIcon = (amenity: string) => {
     switch (amenity) {
       case 'ac':
@@ -77,7 +76,6 @@ export default function CamperCard({ camper }: CamperCardProps) {
           Embrace simplicity and freedom with the {camper.name} {camper.form.replace('_', ' ')} truck...
         </p>
 
-        {/* Баджі характеристик з іконками */}
         <ul className={styles.badges}>
           {camper.engine && (
             <li className={styles.badge}>

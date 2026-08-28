@@ -1,6 +1,5 @@
-//app/catalog/[camperId]/page.tsx
 import { Metadata } from 'next';
-import { fetchCamperById } from '@/lib/api/serverApi'; // <-- Використовуємо serverApi
+import { fetchCamperById } from '@/lib/api/serverApi'; 
 import CamperDetailsClient from './CamperDetailsClient';
 
 interface PageProps {

@@ -1,7 +1,6 @@
 .container {
     width: 100%;
     min-height: calc(100vh - 72px);
-    /* Залишає місце під Header */
     display: flex;
     flex-direction: column;
     align-items: center;

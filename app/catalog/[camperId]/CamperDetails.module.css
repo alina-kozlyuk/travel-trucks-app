@@ -1,15 +1,16 @@
 .pageGrid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  padding: 40px 0;
-  align-items: start;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 20px 16px;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
 }
 
-/* ГАЛЕРЕЯ */
 .galleryBlock {
   width: 100%;
-  max-width: 640px;
+  max-width: 100%;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -17,7 +18,7 @@
 
 .mainSwiper {
   width: 100%;
-  height: 400px;
+  height: 260px;
   border-radius: 12px;
   overflow: hidden;
   position: relative;
@@ -32,12 +33,12 @@
 
 .thumbsSwiper {
   width: 100%;
-  height: 96px;
+  height: 72px;
 }
 
 .thumbSlide {
   position: relative;
-  height: 96px;
+  height: 72px;
   border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
@@ -56,21 +57,24 @@
   height: 100% !important;
 }
 
-/* ІНФОРМАЦІЯ */
-.infoColumn{
+.infoColumn {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
-.infoCard{
+
+.infoCard {
   border-radius: 16px;
-  max-width: 650px;
+  width: 100%;
+  max-width: 100%;
   background-color: #F7F7F7;
-  padding: 24px;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   color: #101828;
   margin-bottom: 8px;
@@ -78,7 +82,8 @@
 
 .metaRow {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 16px;
 }
 
@@ -100,7 +105,7 @@
 }
 
 .price {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 600;
   margin-bottom: 16px;
 }
@@ -108,29 +113,31 @@
 .description {
   color: #475467;
   line-height: 1.5;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
-.devider{
-  border: 1px solid var(--gray-light);
-    width: 602px;
-    height: 0;
+.devider {
+  border: none;
+  border-top: 1px solid var(--gray-light);
+  width: 100%;
+  height: 0;
+  margin: 16px 0;
 }
 
 .detailsCard {
   border-radius: 16px;
-  max-width: 650px;
+  width: 100%;
+  max-width: 100%;
   background-color: var(--inputs);
-  padding: 24px;
-  padding-top: 24px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  
+  box-sizing: border-box;
 }
 
 .detailsTitle {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -142,9 +149,9 @@
 
 .badge {
   background-color: #F2F4F7;
-  padding: 8px 16px;
+  padding: 8px 14px;
   border-radius: 100px;
-  font-size: 14px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -161,11 +168,116 @@
 .specList li {
   display: flex;
   justify-content: space-between;
-  font-size: 16px;
+  font-size: 14px;
 }
 
-/* НИЖНІ БЛОКИ */
 .reviewsBlock,
 .bookingBlock {
   width: 100%;
+}
+
+
+@media (min-width: 768px) {
+  .pageGrid {
+    padding: 32px 24px;
+    gap: 32px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .galleryBlock {
+    max-width: 640px;
+  }
+
+  .mainSwiper {
+    height: 350px;
+  }
+
+  .thumbsSwiper,
+  .thumbSlide {
+    height: 88px;
+  }
+
+  .infoCard,
+  .detailsCard {
+    padding: 24px;
+    max-width: 650px;
+  }
+
+  .title,
+  .price {
+    font-size: 24px;
+  }
+
+  .detailsTitle {
+    font-size: 20px;
+  }
+
+  .badge {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .specList li {
+    font-size: 16px;
+  }
+
+  .description {
+    margin-bottom: 24px;
+  }
+
+  .devider {
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 1200px) {
+  .pageGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1312px;
+      margin: 0 auto;
+      padding: 40px 0;
+      align-items: start;
+    }
+
+.galleryBlock {
+  height: 695px;
+  max-width: 640px;
+  justify-content: space-between;
+}
+
+  .mainSwiper {
+    height: 568px;
+  }
+
+  .thumbsSwiper,
+  .thumbSlide {
+    height: 96px;
+  }
+
+  .infoColumn {
+    height: 680px;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+
+    .infoCard {
+      max-width: 650px;
+      padding: 24px;
+    }
+
+  .devider {
+    width: 602px;
+  }
+
+    .detailsCard {
+      max-width: 650px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 24px;
+    }
 }

@@ -1,4 +1,3 @@
-//app/catalog/[camperId]/CamperDetailsClient.tsx
 'use client';
 
 import { useState } from 'react';
@@ -62,7 +61,6 @@ export default function CamperDetailsClient({ camperId }: Props) {
     <div className="container">
       <div className={styles.pageGrid}>
         
-        {/* БЛОК 1: ГАЛЕРЕЯ */}
         <div className={styles.galleryBlock}>
           <Swiper
             loop={isLoopEnabled}
@@ -78,7 +76,7 @@ export default function CamperDetailsClient({ camperId }: Props) {
                   src={getImgUrl(img)}
                   alt={`${camper.name} photo ${idx + 1}`}
                   fill
-                  priority={idx === 0} // Для усунення зауваження LCP у консолі
+                  priority={idx === 0} 
                   unoptimized
                   sizes="(max-width: 768px) 100vw, 600px"
                   className={styles.imageCover}
@@ -112,7 +110,6 @@ export default function CamperDetailsClient({ camperId }: Props) {
           </Swiper>
         </div>
 
-        {/* БЛОК 2: ІНФОРМАЦІЯ ТА ДЕТАЛІ */}
         <div className={styles.infoColumn}>
           <div className={styles.infoCard}>
             <h1 className={styles.title}>{camper.name}</h1>
@@ -159,12 +156,10 @@ export default function CamperDetailsClient({ camperId }: Props) {
           </div>
         </div>
 
-        {/* БЛОК 3: ВІДГУКИ */}
         <div className={styles.reviewsBlock}>
           <ReviewsList reviews={reviews} />
         </div>
 
-        {/* БЛОК 4: ФОРМА БРОНЮВАННЯ */}
         <div className={styles.bookingBlock}>
           <BookingForm camperId={camperId} />
         </div>

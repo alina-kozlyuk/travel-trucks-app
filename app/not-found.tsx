@@ -2,7 +2,6 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import css from './not-found.module.css';
 
-// Базовий URL твого деплою
 const BASE_URL = 'https://travel-trucks-app-navy.vercel.app';
 
 export const metadata: Metadata = {

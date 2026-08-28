@@ -1,11 +1,10 @@
-//app/layuot.tsx
 import type { Metadata } from 'next';
 import { Inter, Manrope } from 'next/font/google';
 import Header from '@/components/Header/Header';
+import Providers from './providers';
+import { Toaster } from 'react-hot-toast';
 import './globals.css';
-import Providers from "./providers"
 
-// Підключаємо основний шрифт Inter (задаємо змінну --font-inter)
 const inter = Inter({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -13,7 +12,6 @@ const inter = Inter({
   display: 'swap',
 });
 
-// Підключаємо додатковий шрифт Manrope (задаємо змінну --font-manrope)
 const manrope = Manrope({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -24,13 +22,13 @@ const manrope = Manrope({
 const BASE_URL = 'https://travel-trucks-app-navy.vercel.app';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(BASE_URL),
   title: 'TravelTrucks',
   description: 'Camper rental service in Ukraine',
-
   openGraph: {
     title: 'TravelTrucks',
     description: 'Find your perfect camper van for rent',
-    url: 'https://travel-trucks-app-navy.vercel.app/',
+    url: BASE_URL,
     images: [
       {
         url: `${BASE_URL}/hero-bg.jpg`,
@@ -44,19 +42,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-  modal,
 }: Readonly<{
   children: React.ReactNode;
-  modal?: React.ReactNode;
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${manrope.variable}`}>
       <body>
-  <Providers>
-    <Header />
-    <main>{children}</main>
-  </Providers>
-</body>
+        <Providers>
+          <Header />
+          <main>
+            {children}
+            
+          </main>
+          <Toaster position="top-right" reverseOrder={false} />
+        </Providers>
+      </body>
     </html>
   );
 }
