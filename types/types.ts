@@ -1,8 +1,3 @@
-//types/types.ts
-// ==========================================
-// 1. ENUMS & CONST TYPES
-// ==========================================
-
 export type CamperForm =
   | 'alcove'
   | 'panel_van'
@@ -24,13 +19,7 @@ export type CamperAmenity =
   | 'gas'
   | 'water';
 
-// ==========================================
-// 2. CAMPER MODELS
-// ==========================================
 
-/**
- * Елемент галереї детальної сторінки
- */
 export interface CamperGalleryItem {
   id: string;
   camperId: string;
@@ -41,9 +30,7 @@ export interface CamperGalleryItem {
 
 export type GalleryImage = string | CamperGalleryItem;
 
-/**
- * Картка кемпера у списку (GET /campers)
- */
+
 export interface CamperListItem {
   id: string;
   name: string;
@@ -63,9 +50,7 @@ export interface CamperListItem {
   totalReviews: number;
 }
 
-/**
- * Детальна інформація про кемпер (GET /campers/{camperId})
- */
+
 export interface CamperDetail {
   id: string;
   name: string;
@@ -88,25 +73,17 @@ export interface CamperDetail {
   updatedAt: string;
 }
 
-/**
- * Відгук про кемпер (GET /campers/{camperId}/reviews)
- */
+
 export interface CamperReview {
   id: string;
   camperId: string;
   reviewer_name: string;
-  reviewer_rating: number; // 1-5
+  reviewer_rating: number;
   comment: string;
   createdAt: string;
 }
 
-// ==========================================
-// 3. API REQUESTS & RESPONSES
-// ==========================================
 
-/**
- * Параметри фільтрації та пагінації для GET /campers
- */
 export interface CamperFilterParams {
   page?: number;
   perPage?: number;
@@ -116,9 +93,7 @@ export interface CamperFilterParams {
   engine?: CamperEngine | string;
 }
 
-/**
- * Відповідь від GET /campers
- */
+
 export interface CampersFetchResponse {
   page: number;
   perPage: number;
@@ -127,29 +102,22 @@ export interface CampersFetchResponse {
   campers: CamperListItem[];
 }
 
-/**
- * Відповідь від GET /campers/filters
- */
+
 export interface CamperFiltersConfigResponse {
   forms: CamperForm[];
   transmissions: CamperTransmission[];
   engines: CamperEngine[];
 }
 
-/**
- * Тіло запиту на бронювання (POST /campers/{camperId}/booking-requests)
- * Бекенд строго вимагає name та email
- */
+
 export interface BookingRequestBody {
   name: string;
   email: string;
-  bookingDate?: string; // Для збереження стану форми календаря в UI
-  comment?: string;     // Для збереження стану тексту коментаря в UI
+  bookingDate?: string; 
+  comment?: string;     
 }
 
-/**
- * Відповідь бекенду після відправки бронювання
- */
+
 export interface BookingResponse {
   message: string;
 }
