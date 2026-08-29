@@ -55,60 +55,62 @@ export default function CamperDetailsClient({ camperId }: Props) {
     return img.original || img.thumb || '';
   };
 
-  const isLoopEnabled = (camper.gallery?.length ?? 0) > 3;
+  const isLoopEnabled = (camper.gallery?.length ?? 0) > 4;
 
   return (
     <div className="container">
       <div className={styles.pageGrid}>
         
         <div className={styles.galleryBlock}>
-          <Swiper
-            loop={isLoopEnabled}
-            spaceBetween={10}
-            navigation={true}
-            thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-            modules={[FreeMode, Navigation, Thumbs]}
-            className={styles.mainSwiper}
-          >
-            {camper.gallery?.map((img, idx) => (
-              <SwiperSlide key={img.id || idx} className={styles.mainSlide}>
-                <Image
-                  src={getImgUrl(img)}
-                  alt={`${camper.name} photo ${idx + 1}`}
-                  fill
-                  priority={idx === 0} 
-                  unoptimized
-                  sizes="(max-width: 768px) 100vw, 600px"
-                  className={styles.imageCover}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
 
-          <Swiper
-            onSwiper={setThumbsSwiper}
-            loop={isLoopEnabled}
-            spaceBetween={12}
-            slidesPerView={4}
-            freeMode={true}
-            watchSlidesProgress={true}
-            modules={[FreeMode, Navigation, Thumbs]}
-            className={styles.thumbsSwiper}
-          >
-            {camper.gallery?.map((img, idx) => (
-              <SwiperSlide key={img.id || idx} className={styles.thumbSlide}>
-                <Image
-                  src={getImgUrl(img)}
-                  alt={`${camper.name} thumb ${idx + 1}`}
-                  fill
-                  unoptimized
-                  sizes="150px"
-                  className={styles.imageCover}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div>
+  <Swiper
+    loop={isLoopEnabled}
+    spaceBetween={10}
+    navigation={true}
+    thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+    modules={[FreeMode, Navigation, Thumbs]}
+    className={styles.mainSwiper}
+  >
+    {camper.gallery?.map((img, idx) => (
+      <SwiperSlide key={img.id || idx} className={styles.mainSlide}>
+        <Image
+          src={getImgUrl(img)}
+          alt={`${camper.name} photo ${idx + 1}`}
+          fill
+          loading={idx === 0 ? 'eager' : 'lazy'}
+          unoptimized
+          sizes="(max-width: 768px) 100vw, 600px"
+          className={styles.imageCover}
+        />
+      </SwiperSlide>
+    ))}
+  </Swiper>
+
+  <Swiper
+    onSwiper={setThumbsSwiper}
+    loop={isLoopEnabled}
+    spaceBetween={12}
+    slidesPerView={4}
+    freeMode={true}
+    watchSlidesProgress={true}
+    modules={[FreeMode, Navigation, Thumbs]}
+    className={styles.thumbsSwiper}
+  >
+    {camper.gallery?.map((img, idx) => (
+      <SwiperSlide key={img.id || idx} className={styles.thumbSlide}>
+        <Image
+          src={getImgUrl(img)}
+          alt={`${camper.name} thumb ${idx + 1}`}
+          fill
+          loading="lazy"
+          unoptimized
+          sizes="150px"
+          className={styles.imageCover}
+        />
+      </SwiperSlide>
+    ))}
+  </Swiper>
+</div>
 
         <div className={styles.infoColumn}>
           <div className={styles.infoCard}>
